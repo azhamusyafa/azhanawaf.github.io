@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        :root {
+            --primary: #2a2a72;
+            --secondary: #009ffd;
+            --accent: #ff6b6b;
+            --text: #333;
+            --light: #f5f5f5;
+        }
+
+        body {
+            background: var(--light);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(42, 42, 114, 0.95);
+            padding: 1rem;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: var(--accent);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+        }
+
+        .hero-content {
+            display: flex;
+            gap: 4rem;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .profile-img {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid white;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .hero-text {
+            max-width: 600px;
+        }
+
+        .hero-text h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            transition: transform 0.3s;
+        }
+
+        .social-links a:hover {
+            transform: scale(1.2);
+        }
+
+        /* Projects Section */
+        .projects {
+            padding: 5rem 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--primary);
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .project-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .project-info {
+            padding: 1.5rem;
+            color: black;
+        }
+
+        .project-link {
+            text-decoration: underline; /* Menampilkan garis bawah */
+            text-decoration-color: black; /* Warna garis bawah menjadi hitam */
+            color: black; /* Warna teks menjadi hitam */
+        }
+
+        /* Certificates Section */
+        .certificates {
+            padding: 5rem 2rem;
+            background: #f8f9fa;
+        }
+
+        .cert-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .cert-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .cert-card:hover {
+            transform: scale(1.05);
+        }
+
+        .cert-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .cert-info {
+            padding: 1.5rem;
+        }
+
+        /* Experience Section */
+        .experience {
+            padding: 5rem 2rem;
+        }
+
+        .exp-timeline {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .exp-timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 100%;
+            background: var(--primary);
+        }
+
+        .exp-item {
+            margin: 2rem 0;
+            position: relative;
+            width: 50%;
+            padding: 0 2rem;
+        }
+
+        .exp-item:nth-child(odd) {
+            left: 0;
+        }
+
+        .exp-item:nth-child(even) {
+            left: 50%;
+        }
+
+        .exp-content {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 5rem 2rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: var(--secondary);
+            outline: none;
+        }
+
+        .submit-btn {
+            background: var(--primary);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .submit-btn:hover {
+            background: var(--secondary);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .exp-timeline::before {
+                left: 0;
+            }
+
+            .exp-item {
+                width: 100%;
+                left: 0 !important;
+                padding-left: 2rem;
+            }
+        }
+        
+        .skills{
+            padding: 5rem 2rem;
+            background: #f8f9fa;
+        }
+
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 50px;
+            margin-top: 20px;
+            margin-left: 100px;
+            margin-right: 100px;
+        }
+
+        .skill-tag {
+            background-color: #333;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+        }
+
+        .skill-img {
+          max-width: 90px; 
+          height: auto;
+          margin: auto;
+          border-radius: 20px; 
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+          transition: transform 0.3s ease; 
+      }
+      .skill-img:hover {
+        transform: scale(1.1); /* Enlarge on hover */
+    }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#projects">Projects</a>
+            <a href="#certificates">Certificates</a>
+            <a href="#experience">Experience</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
+
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <img src="gambar\fixx.png" alt="Profile Picture" class="profile-img">
+            <div class="hero-text">
+                <h1>Azha Nawaf Musyafa</h1>
+                <p>I am an undergraduate student of Mechatronics
+                    and Artificial Intelligence with a passion for data,
+                    IoT, and Machine Learning. I combine technical
+                    expertise in programming, AI, and embedded
+                    systems with a focus on developing innovative,
+                    data-driven solutions for real-world challenges.</p>
+                <div class="social-links">
+                    <a href="https://www.linkedin.com/in/azha-nawaf-musyafa-1ab0a623a/"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://github.com/azhamusyafa"><i class="fab fa-github"></i></a>
+                </div>
+                <a href="https://drive.google.com/file/d/1yl5kgw9R0azacM-T59abWso8PrgIN4Wt/view?usp=sharing"><h6 style="color: white;">Download CV</h6></a>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="skills">
+        <h2 class="section-title">Skills</h2>
+        <div class="skills-container">
+            <img src="gambar\colab.png" class="skill-img">
+            <img src="gambar\arduino.png" alt="Programming Language 2" class="skill-img">
+            <img src="gambar\c.png" alt="Framework 1" class="skill-img">
+            <img src="gambar\exc.png" alt="Framework 2" class="skill-img">
+            <img src="gambar\firebase.png" alt="Tool 1" class="skill-img">
+            <img src="gambar\Matlab.png" alt="Tool 2" class="skill-img">
+            <img src="gambar\gpt.png" alt="Soft Skill 1" class="skill-img">
+            <img src="gambar\html.png" alt="Soft Skill 2" class="skill-img">
+            <img src="gambar\MySQL.png" alt="Soft Skill 2" class="skill-img">
+            <img src="gambar\post.png" alt="Soft Skill 2" class="skill-img">
+            <img src="gambar\python.png" alt="Soft Skill 2" class="skill-img">
+            <img src="gambar\sem.png" alt="Soft Skill 2" class="skill-img">
+            <img src="gambar\spss.jpg" alt="Soft Skill 2" class="skill-img">
+            <img src="gambar\tableau.png" alt="Soft Skill 2" class="skill-img">
+            <img src="gambar\whis.png" alt="Soft Skill 2" class="skill-img">
+        </div>
+    </section>
+
+    <section id="projects" class="projects">
+        <h2 class="section-title">My Projects</h2>
+        <div class="project-grid">
+            <a href="https://drive.google.com/file/d/1ptnLHm5_FDPO-kPqkhr6ifVHg3TnBWLS/view?usp=sharing" class="project-link" target="_blank" rel="noopener noreferrer">
+                <div class="project-card">
+                    <img src="gambar\suit.png" alt="Project 1" class="project-img">
+                    <div class="project-info">
+                        <h3>rock paper scissors using open cv</h3>
+                        <p>a simple cv project for playing paper rock scissors</p>
+                    </div>
+                </div>
+            </a>
+    
+            <a href="https://github.com/azhamusyafa/Sales-Force-Training/blob/main/Case%201.ipynb" class="project-link" target="_blank" rel="noopener noreferrer">
+                <div class="project-card">
+                    <img src="gambar\pro1.png" alt="Project 2" class="project-img">
+                    <div class="project-info">
+                        <h3>Sales Force Training</h3>
+                        <p>A process to provide strong statistical evidence of a significant difference or absence of difference in transaction averages. The results of the T-Test will indicate whether the company needs to consider a change in strategy based on the differences found.</p>
+                    </div>
+                </div>
+            </a>
+
+            <a href="https://github.com/azhamusyafa/Housing-price/blob/main/Housing%20Price.ipynb" class="project-link" target="_blank" rel="noopener noreferrer">
+                <div class="project-card">
+                    <img src="gambar\pro2.png" alt="Project 2" class="project-img">
+                    <div class="project-info">
+                        <h3>Housing Price</h3>
+                        <p>analyzing whether the properties for sale, such as location zone, number of bedrooms, land size, etc. can affect the selling price of the house.2</p>
+                    </div>
+                </div>
+            </a>
+
+            <a href="https://github.com/azhamusyafa/Timeseries-Analysis-and-Prediction-for-AQI-in-gurugram-city/blob/main/AQI%20gurugram.ipynb" class="project-link" target="_blank" rel="noopener noreferrer">
+                <div class="project-card">
+                    <img src="gambar\pro3.png" alt="Project 2" class="project-img">
+                    <div class="project-info">
+                        <h3>Predicting Air Quality</h3>
+                        <p>Analyzed and predicted the air quality index (AQI) using a timeseries model, including decomposition, stationarity test, and selection of the best ARIMA model for prediction. </p>
+                    </div>
+                </div>
+            </a>
+
+            <a href="https://github.com/azhamusyafa/GOTO_stock_forecasting_LSTMs/blob/main/GOTO_stock_forecasting_LSTMs.ipynb" class="project-link" target="_blank" rel="noopener noreferrer">
+                <div class="project-card">
+                    <img src="gambar\pro4.png" alt="Project 2" class="project-img">
+                    <div class="project-info">
+                        <h3>GoTo Stock Prediction Using LSTM</h3>
+                        <p>Predict the future price of GOTO stock using the LSTM model, which is designed to capture complex patterns in timeseries data.</p>
+                    </div>
+                </div>
+            </a>
+
+            <a href="https://github.com/azhamusyafa/corn-plant-disease-diagnosis/blob/main/tugas%201.ipynb" class="project-link" target="_blank" rel="noopener noreferrer">
+                <div class="project-card">
+                    <img src="gambar\pro5.jpg" alt="Project 2" class="project-img">
+                    <div class="project-info">
+                        <h3>Corn Plant Disease Diagnosis Expert Systems </h3>
+                        <p>Analyze what diseases corn plants experience based on the symptoms they experience.</p>
+                    </div>
+                </div>
+            </a>
+
+            <a href="https://github.com/azhamusyafa/Memprediksi-Kategori-Layanan-Rawat-Inap-atau-jenis-Perawatan-yang-Diberikan-Kepada-Pasien/blob/main/Machine_Learning.ipynb" class="project-link" target="_blank" rel="noopener noreferrer">
+                <div class="project-card">
+                    <img src="gambar\pro6.jpg" alt="Project 2" class="project-img">
+                    <div class="project-info">
+                        <h3>Predicting Service Hospitalization</h3>
+                        <p>Predicting Category of Service Hospitalization or Type of Treatment Provided to Patients</p>
+                    </div>
+                </div>
+            </a>
+
+            <a href="https://github.com/azhamusyafa/Implementing-the-Certainty-Factor-Method-in-a-Dental-Disease-Expert-System" class="project-link" target="_blank" rel="noopener noreferrer">
+                <div class="project-card">
+                    <img src="gambar\pro7.jpg" alt="Project 2" class="project-img">
+                    <div class="project-info">
+                        <h3>Implementing the Certainty Factor Method in a Dental Disease Expert System </h3>
+                        <p>Predict dental diseases based on the symptoms inputted by the patient and then processed by an expert system using the CF method.</p>
+                    </div>
+                </div>
+            </a>
+
+            <a href="https://github.com/azhamusyafa/machine-learning-and-iot-based-air-quality-detector" class="project-link" target="_blank" rel="noopener noreferrer">
+                <div class="project-card">
+                    <img src="gambar\pro8.jpeg" alt="Project 2" class="project-img">
+                    <div class="project-info">
+                        <h3>IoT and Machine Learning-Based Air Quality Prediction</h3>
+                        <p>Predicts the air quality around using sensors and then sends it to firebase forwarded to machine learning which will display the results on the web.</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <section id="certificates" class="certificates">
+        <h2 class="section-title">Certificates</h2>
+        <div class="cert-grid">
+            <div class="cert-card">
+                <img src="gambar\ser0.png" alt="Certificate 1" class="cert-img">
+                <div class="cert-info">
+                    <h3>Data Science</h3>
+                    <p>successfully completed the Data Science bootcamp organized by kelas.com with an A/Excellent grade</p>
+                </div>
+            </div>
+            <div class="cert-card">
+                <img src="gambar\ser1.png" alt="Certificate 2" class="cert-img">
+                <div class="cert-info">
+                    <h3>Data Analyst</h3>
+                    <p>Successfully completed the data Analyst bootcamp organized by MySkill</p>
+                </div>
+            </div>
+            <div class="cert-card">
+                <img src="gambar\ser2.png" alt="Certificate 2" class="cert-img">
+                <div class="cert-info">
+                    <h3>Product Management</h3>
+                    <p>Successfully completed the Product Management bootcamp organized by kelas.com with an A/Excellent grade.</p>
+                </div>
+            </div>
+            <div class="cert-card">
+                <img src="gambar\ser3.png" alt="Certificate 2" class="cert-img">
+                <div class="cert-info">
+                    <h3>Mentor Masterclass 1.0 training</h3>
+                    <p>Successfully completed Mentor Masterclass 1.0 training</p>
+                </div>
+            </div>
+            <div class="cert-card">
+                <img src="gambar\ser4.png" alt="Certificate 2" class="cert-img">
+                <div class="cert-info">
+                    <h3>Memulai Pemrograman dengan Python</h3>
+                    <p>Successfully completed the start programming with python training organized by Dicoding.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience" class="experience">
+        <h2 class="section-title">Experience</h2>
+        <div class="exp-timeline">
+            <div class="exp-item">
+                <div class="exp-content">
+                    <h3>P3RI SALMAN ITB 1444H</h3>
+                    <p>He has experience as a Social Media Specialist, which can be an added value in managing digital and communication strategies.</p>
+                </div>
+            </div>
+            <div class="exp-item">
+                <div class="exp-content">
+                    <h3>HIMATRONIKA AI</h3>
+                    <p>Serves as commission 4 which is responsible for overseeing all activities carried out by the ADKESMA and PSDO
+                        departments.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <h2 class="section-title">Contact Me</h2>
+        <form class="contact-form" action="mailto:azha@upi.edu" method="post">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="message">Message</label>
+                <textarea id="message" name="message" rows="5" required></textarea>
+            </div>
+            <button type="submit" class="submit-btn">Send Message</button>
+        </form>
+    </section>
+</body>
+</html>
