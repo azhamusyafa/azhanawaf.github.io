@@ -310,14 +310,41 @@
 
         /* Responsive Design */
         @media (max-width: 768px) {
+            nav {
+                padding: 0.5rem 1rem;
+            }
             .hero-content {
                 flex-direction: column;
                 text-align: center;
             }
 
             .nav-links {
-                flex-direction: column;
-                align-items: center;
+                flex-direction: column; /* Ubah navigasi menjadi kolom */
+                align-items: flex-start;
+                gap: 1rem;
+                background: rgba(42, 42, 114, 0.95); /* Latar belakang untuk dropdown */
+                position: absolute;
+                top: 60px; /* Sesuaikan dengan tinggi navigasi */
+                left: 0;
+                width: 100%;
+                display: none; /* Awalnya sembunyikan */
+            }
+
+            .nav-links.active {
+                display: flex; /* Tampilkan ketika aktif */
+            }
+
+            .hamburger {
+                display: block; /* Tampilkan hamburger menu */
+                position: absolute;
+                top: 1rem;
+                right: 1rem;
+                font-size: 1.5rem;
+                color: white;
+                background: none;
+                border: none;
+                cursor: pointer;
+                z-index: 1001;
             }
 
             .exp-timeline::before {
@@ -369,6 +396,8 @@
 </head>
 <body>
     <nav>
+        <button class="hamburger" onclick="toggleMenu()">☰</button>
+
         <div class="nav-links">
             <a href="#home">Home</a>
             <a href="#projects">Projects</a>
@@ -593,4 +622,10 @@
         </form>
     </section>
 </body>
+<script>
+    function toggleMenu() {
+        const navLinks = document.querySelector('.nav-links');
+        navLinks.classList.toggle('active');
+    }
+</script>
 </html>
